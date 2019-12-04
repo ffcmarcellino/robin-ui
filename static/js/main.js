@@ -27,15 +27,15 @@ $(document).ready(function () {
     // Predict
     $('#btn-predict').click(function () {
         var form_data = new FormData($('#upload-file')[0]);
-
+        console.log(form_data)
         // Show loading animation
         $(this).hide();
         $('.loader').show();
 
         // Make prediction by calling api /predict
         $.ajax({
-            type: 'POST',
-            url: '/predict',
+            type: 'GET',
+            url: 'https://robin-project.herokuapp.com/robin-api/?url=https://images-na.ssl-images-amazon.com/images/I/61SwuRMAPqL._SX342_.jpg',
             data: form_data,
             contentType: false,
             cache: false,
@@ -45,7 +45,7 @@ $(document).ready(function () {
                 // Get and display the result
                 $('.loader').hide();
                 $('#result').fadeIn(600);
-                $('#result').text(' Model Predict the Water as:  ' + data);
+                $('#result').text(' Prediction:  ' + data);
                 console.log('Success!');
             },
         });
