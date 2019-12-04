@@ -1,5 +1,6 @@
 $(document).ready(function () {
     // Init
+
     $('.image-section').hide();
     $('.loader').hide();
     $('#result').hide();
@@ -26,8 +27,6 @@ $(document).ready(function () {
 
     // Predict
     $('#btn-predict').click(function () {
-        var form_data = new FormData($('#upload-file')[0]);
-        console.log(form_data)
         // Show loading animation
         $(this).hide();
         $('.loader').show();
@@ -36,16 +35,20 @@ $(document).ready(function () {
         $.ajax({
             type: 'GET',
             url: 'https://robin-project.herokuapp.com/robin-api/?url=https://images-na.ssl-images-amazon.com/images/I/61SwuRMAPqL._SX342_.jpg',
-            data: form_data,
-            contentType: false,
             cache: false,
-            processData: false,
             async: true,
+            data: {
+              format: 'json'
+            },
+            error: function(e) {
+              $('#info').html('<p>' + e + '</p>');
+            },
+            dataType: 'jsonp',
             success: function (data) {
                 // Get and display the result
                 $('.loader').hide();
                 $('#result').fadeIn(600);
-                $('#result').text(' Prediction:  ' + data);
+                $('#result').text(' Prediction:  ' + data.category);
                 console.log('Success!');
             },
         });
