@@ -1,14 +1,10 @@
-from __future__ import division, print_function
-# coding=utf-8
+from flask import Flask, request, render_template
+from flask_jsonpify import jsonify
+import imp
 import sys
-import os
-import glob
-import re
 
-# Flask utils
-from flask import Flask, redirect, url_for, request, render_template
-from werkzeug.utils import secure_filename
-
+f, filename, description = imp.find_module('cnn', ['ml-model'])
+imp.load_module('cnn', f, filename, description)
 
 # Define a flask app
 app = Flask(__name__)
@@ -18,6 +14,11 @@ def index():
     # Main page
     return render_template('index.html')
 
+@app.route('/robin-api/', methods=['GET'])
+def controller():
+    print(request.args)
+    return jsonify(sys.modules["cnn"].predict(request.args["url"]))
+
 if __name__ == '__main__':
 
-    app.run()
+    app.run(port='3000')
