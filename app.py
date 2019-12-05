@@ -3,7 +3,6 @@ from flask_jsonpify import jsonify
 import imp
 import sys
 import os
-from werkzeug.utils import secure_filename
 
 f, filename, description = imp.find_module('cnn', ['ml-model'])
 imp.load_module('cnn', f, filename, description)
@@ -24,7 +23,7 @@ def controller():
     # Save the file to ./uploads
     basepath = os.path.dirname(__file__)
     file_path = os.path.join(
-    basepath, 'uploads', secure_filename(f.filename))
+    basepath, 'uploads', "img.jpg")
     f.save(file_path)
     return jsonify(sys.modules["cnn"].predict(file_path))
 
