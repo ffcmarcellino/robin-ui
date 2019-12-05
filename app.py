@@ -21,9 +21,7 @@ def controller():
     f = request.files['file']
 
     # Save the file to ./uploads
-    basepath = os.path.dirname(__file__)
-    file_path = os.path.join(
-    basepath, 'uploads', "img.jpg")
+    file_path = './uploads/img.jpg'
     f.save(file_path)
     return jsonify(sys.modules["cnn"].predict(file_path))
 
