@@ -34,7 +34,7 @@ $(document).ready(function () {
         // Make prediction by calling api /predict
         $.ajax({
             type: 'GET',
-            url: 'https://robin-project.herokuapp.com/robin-api/?url=https://images-na.ssl-images-amazon.com/images/I/61SwuRMAPqL._SX342_.jpg',
+            url: '/robin-api/?url=https://images-na.ssl-images-amazon.com/images/I/61SwuRMAPqL._SX342_.jpg',
             cache: false,
             async: true,
             data: {
