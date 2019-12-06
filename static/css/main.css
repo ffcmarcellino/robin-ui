@@ -48,3 +48,31 @@ input[type="file"] {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+.site-footer
+{
+  background-color:#26272b;
+  padding:5px;
+  font-size:15px;
+  line-height:15px;
+  color:#ffffff;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.author, .year
+{
+  margin:5px
+}
+@media (max-width:767px)
+{
+  .site-footer
+  {
+    padding-bottom:0
+  }
+  .site-footer .author, .site-footer .year
+  {
+    text-align:center
+  }
+}
