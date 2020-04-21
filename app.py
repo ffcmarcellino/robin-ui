@@ -1,11 +1,8 @@
 from flask import Flask, request, render_template
 from flask_jsonpify import jsonify
-import imp
+from ml_model import cnn
 import sys
 import os
-
-f, filename, description = imp.find_module('cnn', ['ml-model'])
-imp.load_module('cnn', f, filename, description)
 
 # Define a flask app
 app = Flask(__name__)
@@ -23,7 +20,7 @@ def controller():
     # Save the file to ./uploads
     file_path = './uploads/img.jpg'
     f.save(file_path)
-    return jsonify(sys.modules["cnn"].predict(file_path))
+    return jsonify(cnn.predict(file_path))
 
 if __name__ == '__main__':
 
